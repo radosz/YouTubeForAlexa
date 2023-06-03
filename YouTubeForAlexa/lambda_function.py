@@ -213,11 +213,9 @@ def build_video_response(title, output, url):
 
 
 def lambda_handler(event, context):
-    if 'expires' in environ and int(datetime.strftime(datetime.now(), '%Y%m%d')) > int(environ['expires']):
-        return skill_expired()
-#    elif 'TESTYT' in environ:
-#        return test_yt_limit()
     global strings
+    if 'request' not in event:
+        strings = strings_en
     if event['request']['locale'][0:2] == 'fr':
         strings = strings_fr
     elif event['request']['locale'][0:2] == 'it':
